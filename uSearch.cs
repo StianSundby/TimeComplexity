@@ -90,7 +90,7 @@ namespace uMethodLib
     /// <param name="low">Starting point</param>
     /// <param name="high">End point</param>
     /// <returns></returns>
-    public static int SearchUnbound(int low, int high)
+    public static int BinarySearchUnbound(int low, int high)
     {
       while (true)
       {
@@ -282,7 +282,7 @@ namespace uMethodLib
     /// <param name="x">First list</param>
     /// <param name="y">Second list</param>
     /// <returns>true if first list (x) is present in second list (y)</returns>
-    public static bool Search(SublistSearchNode x, SublistSearchNode y)
+    public static bool SublistSearch(SublistSearchNode x, SublistSearchNode y)
     {
       var sn1 = x;
       if (x == null && y == null) return true;
