@@ -1,0 +1,45 @@
+# Visual Studio files
+.vscode/
+.vs/
+*.suo
+*.user
+*.suo
+*.userprefs
+
+# Build and binary files
+/bin/
+/obj/
+
+# Package and dependency management
+/packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Logs
+*.log
+*.log.*
+
+# Visual Studio backup files
+*.bak
+
+# Temporary files
+[Tt]emp/
+[Oo]bj/
+
+# User-specific files
+*.suo
+*.user
+*.suo
+*.userprefs
+
+# IDE-specific files (for JetBrains Rider)
+.idea/
+
+# Compiled executables
+*.exe
+*.dll
+
+# User-specific or system-specific files
+.DS_Store
+Thumbs.db
