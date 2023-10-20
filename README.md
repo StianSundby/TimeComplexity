@@ -53,6 +53,20 @@ TimeComplexity.exe --all --datasetsize 5000000
   - Jump Search                 - O(√n)
   - Linear Search               - O(n)
   - Ternary Search              - O(log3(n))
+- **Unsorted Search**
+  - First Positive              - O(n)
+  - Front and Back Search       - O(n/2)
+  - Linear Search               - O(n)
+  - Parallel Search             - O(n/p)
+- **Hash Based Search**
+  - Hash Search                 - O(1)
+  - Convert Array to Hash Table - O(n)
+
+#Sorting
+Not implemented yet
+
+#Pathfinding
+Not implemented yet
 ## Acknowledgements
  - [Spectre.Console](https://spectreconsole.net/)
  - [Readme.so](https://readme.so/)
