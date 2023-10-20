@@ -5,6 +5,8 @@
 *.user
 *.suo
 *.userprefs
+*.sln
+*.csproj
 
 # Build and binary files
 /bin/
@@ -44,6 +46,7 @@ project.fragment.lock.json
 .DS_Store
 Thumbs.db
 
+# Packages
 /packages/
 *.nupkg
 project.lock.json
