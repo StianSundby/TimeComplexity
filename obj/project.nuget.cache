@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "zNOlAcP92ScTzXKGXGQkufO/SwWMxgXqUa53jaLz0q8eP+K4ssUPU1B2Qr+54hhVRzk3iGTjj/ojOR8BB+tHqQ==",
+  "dgSpecHash": "NxH2K707TUrfp1fLOq5fntxyQvzjH8t0mVvyX2Hbh8s7sbsHEGtyHkxwo9Zx7OAFbd7Wr/AYNvo2k0Bh8zwynA==",
   "success": true,
-  "projectFilePath": "C:\\prog\\uMethodLib\\uMethodLib\\uMethodLib.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\Repos\\uMethodLib\\uMethodLib.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Stian\\.nuget\\packages\\spectre.console\\0.47.0\\spectre.console.0.47.0.nupkg.sha512",
+    "C:\\Users\\Stian\\.nuget\\packages\\spectre.console.cli\\0.47.0\\spectre.console.cli.0.47.0.nupkg.sha512",
+    "C:\\Users\\Stian\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512"
+  ],
   "logs": []
 }
