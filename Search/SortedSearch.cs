@@ -38,6 +38,7 @@ namespace uMethodLib.Search
         /// Binary search iteratively divides the array into halves and narrows down the search range 
         /// until the target is found or determined to be absent. This method is the standard iterative 
         /// binary search.
+        /// Time Complexity: O(log n)
         /// </summary>
         /// <param name="arr">Sorted Array to search</param>
         /// <param name="x">Target to find</param>
@@ -65,6 +66,7 @@ namespace uMethodLib.Search
         /// Searches for a target value in a sorted array within a specified range using binary search. 
         /// Binary search iteratively narrows down the search range by dividing it into halves until the 
         /// target is found or determined to be absent. This method allows searching within a specific range.
+        /// Time Complexity: O(log n)
         /// </summary>
         /// <param name="arr">Sorted Array to search</param>
         /// <param name="l">Starting point</param>
