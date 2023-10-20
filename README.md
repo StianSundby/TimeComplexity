@@ -40,19 +40,19 @@ TimeComplexity.exe --path
 TimeComplexity.exe --all --datasetsize 5000000
 ```
 ## Algorithms implemented
-* Sorted Search
-    * Basic For Loop Search       - O(n)
-    * Binary Search (Recursive)   - O(log n)
-    * Binary Search (Iterative)   - O(log n)
-    * Binary Search (Ubiquitous)  - O(log n)
-    * Binary Search (Unbound)     - O(log n)
-    * Exponential Search          - O(log n)
-    * Fibonacci Search            - O(log n)
-    * IndexOf()                   - O(n)
-    * Interpolation Search        - O(log log n)
-    * Jump Search                 - O(√n)
-    * Linear Search               - O(n)
-    * Ternary Search              - O(log3(n))
+- **Sorted Search**
+  - Basic For Loop Search       - O(n)
+  - Binary Search (Recursive)   - O(log n)
+  - Binary Search (Iterative)   - O(log n)
+  - Binary Search (Ubiquitous)  - O(log n)
+  - Binary Search (Unbound)     - O(log n)
+  - Exponential Search          - O(log n)
+  - Fibonacci Search            - O(log n)
+  - IndexOf()                   - O(n)
+  - Interpolation Search        - O(log log n)
+  - Jump Search                 - O(√n)
+  - Linear Search               - O(n)
+  - Ternary Search              - O(log3(n))
 ## Acknowledgements
  - [Spectre.Console](https://spectreconsole.net/)
  - [Readme.so](https://readme.so/)
