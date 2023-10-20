@@ -43,3 +43,8 @@ project.fragment.lock.json
 # User-specific or system-specific files
 .DS_Store
 Thumbs.db
+
+/packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
