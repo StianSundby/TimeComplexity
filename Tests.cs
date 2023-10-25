@@ -1,32 +1,32 @@
-﻿using static uMethodLib.Search.SublistSearch;
+using static uMethodLib.Search.SublistSearch;
 using static uMethodLib.UtilityMethods;
+using static uMethodLib.Sort.Sort;
+using uMethodLib.Pathfinding;
 using uMethodLib.Search;
-using System;
+using TimeComplexity.MST;
+using TimeComplexity.Pathfinding;
 
 namespace uMethodLib
 {
     internal class Tests
     {
-        #region Sorted Search
+        static readonly Random random = new();
+        #region Search
         /// <summary>
         /// Performs performance tests for various search algorithms using a sorted dataset.
+        /// All datasets has an increase of 1 on each index, except the dataset used for Fibonacci Search,
+        /// which requires that each indices is a number from the Fibonacci sequence, in ascending order.
         /// </summary>
         /// <param name="n">The size of the dataset to test.</param>
+        /// /// <returns>The results of each test - I.E. how long each algorithm took to complete.</returns>
         public static Dictionary<string, TimeSpan> PerformSortedSearchTests(int n)
         {
-            // Generate a random target value
-            Random random = new();
-
-
-            // Create a fibonacci sorted array
             int[] fibArray = GenerateFibonacciSortedArray(n);
             int fibTarget = fibArray[random.Next(0, n - 1)];
 
-            // Create a sorted test array
-            int[] testArray = GenerateArray(n, true);
+            int[] testArray = GenerateIntArray(n, true);
             int target = random.Next(1, n);
 
-            // Measure the performance of various search algorithms and store the results in a dictionary
             var results = new Dictionary<string, TimeSpan>
             {
                 ["Binary (Recursive)"] = MeasurePerformance(() => SortedSearch.BinarySearchRecursive(testArray, 0, n - 1, target)),
@@ -44,18 +44,19 @@ namespace uMethodLib
                 //TODO: Maybe add Exponential Interpolation Search
             };
 
-            return results;
-        }
-        #endregion
+                return results;
+            }
 
-        #region
+        /// <summary>
+        /// Performs performance tests for various search algorithms using an unsorted dataset.
+        /// </summary>
+        /// <param name="n">The size of the dataset to test.</param>
+        /// /// <returns>The results of each test - I.E. how long each algorithm took to complete.</returns>
         public static Dictionary<string, TimeSpan> PerformUnsortedSearchTests(int n)
         {
-            Random random = new();
-            int[] testArray = GenerateArray(n, false); // Create an unsorted test array
-            int target = testArray[random.Next(1, n)]; // Pick a random target value
+            int[] testArray = GenerateIntArray(n, false);
+            int target = testArray[random.Next(1, n)];
 
-            // Measure the performance of various search algorithms and store the results in a dictionary
             var results = new Dictionary<string, TimeSpan>
             {
                 ["Basic Linear"] = MeasurePerformance(() => UnsortedSearch.BasicLinearSearch(testArray, target)),
@@ -67,17 +68,14 @@ namespace uMethodLib
 
             return results;
         }
-        #endregion
 
-        #region First Positive Search
         /// <summary>
-        /// Performs performance tests for first positive search on a sorted array.
+        /// Performs performance tests for first positive search on an unsorted array with only 1 positive integer.
         /// </summary>
         /// <param name="n">The size of the dataset to test.</param>
+        /// /// <returns>The results of each test - I.E. how long each algorithm took to complete.</returns>
         public static Dictionary<string, TimeSpan> PerformFirstPositiveTests(int n)
         {
-            // Create an array with negative values and a single positive value
-            Random random = new();
             var testArray = new int[n];
             for (int i = 0; i < n; i++) testArray[i] = -i;
             testArray[random.Next(0, n - 1)] = 1;
@@ -87,7 +85,6 @@ namespace uMethodLib
             Array.Sort(testArray);
             var unboundResult = MeasurePerformance(() => SortedSearch.BinarySearchUnbound(testArray, 0, n - 1));
 
-            // Measure the performance of the search algorithms and store the results in a dictionary
             var results = new Dictionary<string, TimeSpan>
             {
                 ["Linear (unsorted)"] = linearResult,
@@ -96,18 +93,18 @@ namespace uMethodLib
 
             return results;
         }
-        #endregion
 
-        #region Sublist Search
         /// <summary>
         /// Performs performance tests for sublist search.
+        /// Which means it checks if one list is present within another
         /// </summary>
         /// <param name="n">The size of the dataset to test (will be reduced).</param>
+        /// <returns>The results of each test - I.E. how long each algorithm took to complete.</returns>
         public static Dictionary<string, TimeSpan> PerformSublistSearchTests(int n)
         {
-            var (x, y) = GenerateLargeLists(100);
+            var (x, y) = GenerateLargeLists(n);
             var (xNode, yNode) = (CreateSublistSearchNode(x), CreateSublistSearchNode(y));
-            // Measure the performance of the sublist search algorithms and store the results in a dictionary
+
             var results = new Dictionary<string, TimeSpan>
             {
                 ["Basic Sublist Search"] = MeasurePerformance(() => BasicSublistSearch(x, y)),
@@ -118,6 +115,72 @@ namespace uMethodLib
         }
         #endregion
 
-        //TODO: add test section for sublist search vs. the regular way of doing it
+        #region Sort
+        /// <summary>
+        /// Performs performance tests for various sorting algorithms using unsorted datasets.
+        /// CountingSort is the only one with a special dataset - all indices has a minimum value of 0 and a maximum value of 255
+        /// </summary>
+        /// <param name="n">The size of the dataset to test. Will be divided by 100</param>
+        /// <returns>The results of each test - I.E. how long each algorithm took to complete.</returns>
+        public static Dictionary<string, TimeSpan> PerformSortTests(int n)
+        {
+            n /= 100;
+            int[] testArray = GenerateIntArray(n, false);
+            int[] countTestArray = GenerateIntArray(n, false, 255);
+
+
+            var results = new Dictionary<string, TimeSpan>
+            {
+                ["Bubble Sort"] = MeasurePerformance(() => BubbleSort(testArray)),
+                ["Bidrectional Bubble Sort"] = MeasurePerformance(() => BidirectionalBubbleSort(testArray)),
+                ["Bucket Sort"] = MeasurePerformance(() => BucketSort(testArray, n)),
+                ["Counting Sort"] = MeasurePerformance(() => CountingSort(countTestArray)),
+                ["Heap Sort"] = MeasurePerformance(() => HeapSort(testArray)),
+                ["Insertion Sort"] = MeasurePerformance(() => InsertionSort(testArray)),
+                ["Merge Sort"] = MeasurePerformance(() => MergeSort(testArray, 0, n - 1)),
+                ["Quick Sort"] = MeasurePerformance(() => QuickSort(testArray, 0, n - 1)),
+                ["Radix Sort"] = MeasurePerformance(() => RadixSort(testArray, n)),
+                ["Selection Sort"] = MeasurePerformance(() => SelectionSort(testArray)),
+                ["Shell Sort"] = MeasurePerformance(() => ShellSort(testArray)),
+                ["Comb Sort"] = MeasurePerformance(() => CombSort(testArray)),
+                ["Odd-Even Sort"] = MeasurePerformance(() => OddEvenSort(testArray)),
+            };
+
+            return results;
+        }
+        #endregion
+
+        #region Pathfinding
+        //public static Dictionary<string, TimeSpan> PerformPathfindingTests(int n)
+        //{
+        //    n /= 100;
+        //    int[,] graph = GenerateRandomGraph(n, 500);
+        //    int startNode = random.Next(0, n);
+
+        //    var results = new Dictionary<string, TimeSpan>()
+        //    {
+        //        ["Dijkstra's Algorithm"] = MeasurePerformance(() => Dijkstra.DijkstraSearch(graph, startNode, startNode)),
+        //        //TODO: A*
+        //        //TODO: D*
+        //        //TODO: Cycle Detection
+        //        //TODO: Breadth-first
+        //        //TODO: Depth-first
+        //        //TODO: Jump Point
+        //        //TODO: Johnson's Algorithm
+        //        //TODO: Bellman-Ford
+        //        //TODO: Floyd-Warshall
+        //        //TODO: Yen's K
+        //        //TODO: All-Pairs
+        //        //TODO: Single Source
+        //        //TODO: Maximum Flow
+        //        //TODO: Prim MST
+        //        //TODO: Kruskal MST
+        //        //TODO: Random Walk
+        //        //TODO: Greedy
+        //    };
+
+        //    return results;
+        //}
+        #endregion
     }
 }
