@@ -1,6 +1,3 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-using System;
-
 namespace uMethodLib.Search
 {
     public class SortedSearch
@@ -21,16 +18,16 @@ namespace uMethodLib.Search
         {
             while (left <= right)
             {
-                int mid = left + (right - left) / 2; //Get middle index
+                int mid = left + (right - left) / 2;
 
                 if (arr[mid] == target) 
-                    return mid; //If value at mid is target, return index
+                    return mid;
                 if (arr[mid] > target) 
                     right = mid - 1; //Update 'right' for left subarray
                 else 
                     left = mid + 1; //Update 'left' for right subarray
             }
-            return -1; // Target not found in the array, return -1.
+            return -1;
         }
 
         /// <summary>
@@ -48,7 +45,7 @@ namespace uMethodLib.Search
             int l = 0, h = arr.Length - 1;
             while (h - l > 1)
             {
-                int mid = (h + l) / 2; //Get middle index
+                int mid = (h + l) / 2;
                 if (arr[mid] < x) 
                     l = mid + 1;
                 else 
@@ -211,13 +208,13 @@ namespace uMethodLib.Search
                     fibMMinus2 = fib - fibMMinus1;
                 }
                 else
-                    return i; // Target found
+                    return i;
             }
 
             if (fibMMinus1 == 1 && arr[offset + 1] == target)
                 return offset + 1;   
 
-            return -1; // Target not found
+            return -1;
         }
         #endregion
 
@@ -320,7 +317,6 @@ namespace uMethodLib.Search
             }
             return -1;
         }
-
 
         /// <summary>
         /// Performs a slightly improved linear search for a target value in an array. This version 
