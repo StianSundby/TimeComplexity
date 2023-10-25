@@ -80,7 +80,7 @@ TimeComplexity.exe --path
 ```bash
 TimeComplexity.exe --all --datasetsize 5000000
 ```
-![Algorithm test results](https://imgur.com/a/PTmN2gT)
+![Test results](https://github.com/StianSundby/TimeComplexity/assets/88629622/4d11556e-6c65-4fff-9e76-d4ff7b27251a)
 
 ## Acknowledgements
  - [Spectre.Console](https://spectreconsole.net/)
