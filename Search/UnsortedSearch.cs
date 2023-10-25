@@ -1,4 +1,4 @@
-﻿namespace uMethodLib.Search
+namespace uMethodLib.Search
 {
     internal class UnsortedSearch
     {
@@ -14,10 +14,8 @@
         public static int BasicLinearSearch(int[] arr, int target)
         {
             for (int i = 0; i < arr.Length; i++)
-            {
                 if (arr[i] == target)
                     return i;
-            }
             return -1;
         }
 
@@ -88,7 +86,6 @@
         {
             int chunkSize = arr.Length / Environment.ProcessorCount;
 
-            // Use PLINQ to perform the parallel search
             return ParallelEnumerable.Range(0, Environment.ProcessorCount)
                 .Select(i =>
                 {
@@ -99,7 +96,7 @@
                         if (arr[j] == target) 
                             return j;
                     
-                    return -1; // Target not found in this chunk
+                    return -1;
                 })
                 .FirstOrDefault(index => index != -1); // Find the first non-negative index
         }
@@ -119,7 +116,6 @@
             for (int i = 0; i < arr.Length; i++)
                 if (arr[i] > 0)
                     return i;
-
             return -1;
         }
         #endregion
