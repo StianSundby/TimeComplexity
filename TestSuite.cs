@@ -1,4 +1,4 @@
-﻿using Spectre.Console;
+using Spectre.Console;
 using Spectre.Console.Cli;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +11,9 @@ namespace uMethodLib
     {
         public sealed class Settings : CommandSettings
         {
-            [Description("Which tests do you wish to run?\nAll tests are enabled by default, and ran against a dataset with a length of 1.000.000")]
+            [Description("Which tests do you wish to run?\nAll tests are enabled by default." +
+                "\nAll test are ran against a dataset with a length of 1.000.000, except Sorting " +
+                "algorithms which are ran against a dataset with a length of 1.000.000/100")]
             [CommandArgument(0, "[catalogue]")]
             public string? Catalogue { get; init; }
 
@@ -58,24 +60,18 @@ namespace uMethodLib
             if (settings.RunSearch)
             {
                 //TODO: Clean this up somehow?
-                results["Sorted Search"] = PerformSortedSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
-                results["Unsorted Search"] = PerformUnsortedSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
-                results["First Positive"] = PerformFirstPositiveTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value); //TODO: somehow add a an option to the --search command settings to enable or disable this test
-
-                //TODO: Implement Sublist Search (I have to make some dummy data for it to loop through)
-                results["Sublist Search"] = PerformSublistSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value); //TODO: somehow add a an option to the --search command settings to enable or disable this test
+                results["Sorted Search algorithms"] = PerformSortedSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+                results["Unsorted Search algorithms"] = PerformUnsortedSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+                results["First Positive algorithms"] = PerformFirstPositiveTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+                results["Sublist Search algorithms"] = PerformSublistSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
 
             }
 
-            //if (settings.RunSort)
-            //{
-
-            //}
+            if (settings.RunSort)
+                results["Sorting algorithms"] = PerformSortTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
 
             //if (settings.RunPath)
-            //{
-
-            //}
+            //    results["Pathfinding algorithms"] = PerformPathfindingTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
 
             RenderResults(results);
             return 0;
@@ -83,19 +79,21 @@ namespace uMethodLib
 
         private static void RenderResults(Dictionary<string, Dictionary<string, TimeSpan>> results)
         {
+            var maxNameLength = results.SelectMany(pair => pair.Value.Keys).Max(name => name.Length);
+
             var failedTests = new Dictionary<string, Dictionary<string, TimeSpan>>();
             foreach (var (testName, testResults) in results)
             {
                 var chart = new BarChart()
                     .Width(100)
-                    .Label($"[green bold underline]\n{testName}[/]")
+                    .Label($"[green bold underline]\n\n\n{testName}\n[/]")
                     .CenterLabel();
 
-                var gradient = GenerateGradient(testResults.Count);
+                var gradient = GenerateGradient(testResults.Count == 1 ? 2 : testResults.Count);
                 int colorIndex = 0;
-
                 foreach (var (name, time) in testResults)
                 {
+                    string paddedName = name.PadLeft(maxNameLength);
                     if (time == TimeSpan.Zero)
                     {
                         if (!failedTests.ContainsKey(testName))
@@ -104,7 +102,7 @@ namespace uMethodLib
                         continue;
                     }
 
-                    chart.AddItem(name, time.TotalMilliseconds, gradient[colorIndex]);
+                    chart.AddItem(paddedName, time.TotalMilliseconds, gradient[colorIndex]);
                     colorIndex++;
                 }
 
