@@ -1,8 +1,7 @@
-﻿namespace uMethodLib.Search
+namespace uMethodLib.Search
 {
     public class SublistSearch
     {
-        #region SublistSearch
         /// <summary>
         /// Basic for loop search - checks each individual index in order.
         /// Time Complexity: O(m * n), where m is the length of the first list and n is the length of the second list.
@@ -10,7 +9,6 @@
         /// <param name="x">First List</param>
         /// <param name="y">Second List</param>
         /// <returns>true if first list (x) is present in second list (y)</returns>
-
         public static bool BasicSublistSearch(List<int>? x, List<int>? y)
         {
             if (x == null || y == null) return false;
@@ -18,15 +16,15 @@
             int j = 0;
             for (int i = 0; i < y.Count; i++)
             {
-                if (y[i] == x[j]) // If the current element in 'y' matches the current element in 'x'
+                if (y[i] == x[j])
                 {
                     j++; // Move to the next element in 'x'
-                    if (j == x.Count) 
-                        return true; // If all elements in 'x' have been found, return true
+                    if (j == x.Count) // If all elements in 'x' have been found
+                        return true; 
                 }
                 else j = 0; // If the current element in 'y' does not match the current element in 'x', reset the counter for 'x'
             }
-            return false; // Sublist not found
+            return false;
         }
         /// <summary>
         /// Attempts to find the first sublist 'x' in the second sublist 'y'. Sublist search iteratively 
@@ -39,10 +37,9 @@
         /// <returns>true if first list (x) is present in second list (y)</returns>
         public static bool AdvSublistSearch(SublistSearchNode? x, SublistSearchNode? y)
         {
-            // Check for cases where either or both lists are null
             if (x == null && y == null) return true;
             if (x == null || y == null) return false;
-            var sn1 = x; // Initialize the first sublist node
+            var sn1 = x; //first sublist node
 
             while (y != null)
             {
@@ -57,11 +54,12 @@
                     }
                     else break;
                 }
-                if (sn1 == null) return true; // Sublist found in the second list
+                if (sn1 == null) 
+                    return true; // Sublist found in the second list
                 sn1 = x; // Reset the first sublist node for the next iteration
                 y = y.Next; // Move to the next node in the second list
             }
-            return false; // Sublist not found
+            return false;
         }
 
         /// <summary>
@@ -72,12 +70,13 @@
         /// <returns>A linked list of SublistSearchNode, or null if the input list is null or empty.</returns>
         public static SublistSearchNode? CreateSublistSearchNode(List<int>? list)
         {
-            if (list == null || list.Count == 0) return null; // Check if the input list is null or empty
+            if (list == null || list.Count == 0) 
+                return null;
 
             SublistSearchNode? head = null;
             SublistSearchNode? current = null;
 
-            foreach (int value in list) // Iterate through the input list and create nodes for each value
+            foreach (int value in list) //create nodes for each value
             {
                 var newNode = NewNode(value);
 
@@ -90,13 +89,13 @@
                 {
                     if (current != null)
                     {
-                        current.Next = newNode; // Connect the current node to the new node
-                        current = newNode; // Move the current node to the new node
+                        current.Next = newNode;
+                        current = newNode;
                     }
                 }
             }
 
-            return head; // Return the head of the linked list
+            return head;
         }
 
         /// <summary>
@@ -114,7 +113,6 @@
             };
             return temp;
         }
-        #endregion
     }
 
     public class SublistSearchNode
