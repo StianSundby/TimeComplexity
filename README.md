@@ -40,33 +40,47 @@ TimeComplexity.exe --path
 TimeComplexity.exe --all --datasetsize 5000000
 ```
 ## Algorithms implemented
-- **Sorted Search**
-  - Basic For Loop Search       - O(n)
-  - Binary Search (Recursive)   - O(log n)
-  - Binary Search (Iterative)   - O(log n)
-  - Binary Search (Ubiquitous)  - O(log n)
-  - Binary Search (Unbound)     - O(log n)
-  - Exponential Search          - O(log n)
-  - Fibonacci Search            - O(log n)
-  - IndexOf()                   - O(n)
-  - Interpolation Search        - O(log log n)
-  - Jump Search                 - O(√n)
-  - Linear Search               - O(n)
-  - Ternary Search              - O(log3(n))
-- **Unsorted Search**
-  - First Positive              - O(n)
-  - Front and Back Search       - O(n/2)
-  - Linear Search               - O(n)
-  - Parallel Search             - O(n/p)
-- **Hash Based Search**
-  - Hash Search                 - O(1)
-  - Convert Array to Hash Table - O(n)
+| **Type** | **Algorithm** | **Time Complexity** |
+|:---:|:---:|:---:|
+| **Sorted Search** | Basic For Loop | O(n) |
+|  | Binary Search (Recursive) | O(log n) |
+|  | Binary Search (Iterative) | O(log n) |
+|  | Binary Search (Ubiquitous) | O(log n) |
+|  | Exponential Search | O(log n) |
+|  | Fibonacci Search | O(log n) |
+|  | IndexOf() | O(n) |
+|  | Interpolation Search | O(log log n) |
+|  | Jump Search | O(√n) |
+|  | Linear Search | O(n) |
+|  | Ternary Search | O(log₃(n)) |
+|  |  |  |
+| **Unsorted Search** | Front and Back Search | O(n/2) |
+|  | Linear Search | O(n) |
+|  | Parallel Search | O(n/p) |
+|  |  |  |
+| **First Positive Search** | Binary Search (Unbound) | O(log n) |
+|  | Linear Search | O(n) |
+|  |  |  |
+| **Hash Based Search** | Convert Array to Hash Table | O(n) |
+|  | Hash Search | O(1) |
+|  |  |  |
+| **Sublist Search** | Basic | O(m * n) |
+|  | Advanced | O(m + n) |
+|  |  |  |
+| **Sorting** | Bubble Sort | O(n^2) |
+|  | Bidirectional Bubble Sort | O(n^2) |
+|  | Bucket Sort | O(n^2) |
+|  | Comb Sort | O(n^2) |
+|  | Counting Sort | O(n + k) |
+|  | Heap Sort | O(n * log(n)) |
+|  | Insertion Sort | O(n^2) |
+|  | Merge Sort | O(n * log(n)) |
+|  | Odd-Even Sort | O(n^2) |
+|  | Quick Sort | O(n^2) |
+|  | Radix Sort | O(n * k) |
+|  | Selection Sort | O(n^2) |
+|  | Shell Sort | O(n^(4/3)) |
 
-#Sorting
-Not implemented yet
-
-#Pathfinding
-Not implemented yet
 ## Acknowledgements
  - [Spectre.Console](https://spectreconsole.net/)
  - [Readme.so](https://readme.so/)
