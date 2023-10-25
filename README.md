@@ -10,35 +10,6 @@
 
 **Other technologies:** Spectre.Console 0.47.0, Spectre.Console.Cli 0.47.0
 
-
-## Running Tests
-
-To run tests, run the following command
-
-#### Run All Tests
-```bash
-TimeComplexity.exe --all
-```
-
-#### Run Specific Tests
-
-```bash
-TimeComplexity.exe --search
-```
-
-```bash
-TimeComplexity.exe --sort
-```
-
-```bash
-TimeComplexity.exe --path
-```
-
-#### Specify a Custom Dataset Size
-
-```bash
-TimeComplexity.exe --all --datasetsize 5000000
-```
 ## Algorithms implemented
 | **Type** | **Algorithm** | **Time Complexity** |
 |:---:|:---:|:---:|
@@ -80,6 +51,36 @@ TimeComplexity.exe --all --datasetsize 5000000
 |  | Radix Sort | O(n * k) |
 |  | Selection Sort | O(n^2) |
 |  | Shell Sort | O(n^(4/3)) |
+
+## Running Tests
+
+To run tests, run the following command
+
+#### Run All Tests
+```bash
+TimeComplexity.exe --all
+```
+
+#### Run Specific Tests
+
+```bash
+TimeComplexity.exe --search
+```
+
+```bash
+TimeComplexity.exe --sort
+```
+
+```bash
+TimeComplexity.exe --path
+```
+
+#### Specify a Custom Dataset Size
+
+```bash
+TimeComplexity.exe --all --datasetsize 5000000
+```
+![Algorithm test results](https://imgur.com/a/PTmN2gT)
 
 ## Acknowledgements
  - [Spectre.Console](https://spectreconsole.net/)
