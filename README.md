@@ -38,6 +38,12 @@
 | **Sublist Search** | Basic | O(m * n) |
 |  | Advanced | O(m + n) |
 |  |  |  |
+| **String Search** | Brute Force | O((n-m+1)m) |
+|  | Knuth-Morris-Pratt Algorithm | O(n + m) |
+|  | Boyer-Moore Algorithm | O(n/m) |
+|  | Rabin-Karp Algorithm | O((n-m+1)m) |
+|  | Aho-Corasick Algorithm | O(n + m + z) |
+|  |  |  |
 | **Sorting** | Bubble Sort | O(n^2) |
 |  | Bidirectional Bubble Sort | O(n^2) |
 |  | Bucket Sort | O(n^2) |
@@ -51,6 +57,17 @@
 |  | Radix Sort | O(n * k) |
 |  | Selection Sort | O(n^2) |
 |  | Shell Sort | O(n^(4/3)) |
+
+## Algorithms to be implemented
+| **Type** | **Algorithm** |
+|:---:|:---:|
+| **MST** | Kruskal |
+|  | Prim |
+| **Pathfinding** | A* |
+|  | Dijkstra |
+|  | Jump Point |
+|  | Flood Fill |
+
 
 ## Running Tests
 
@@ -80,7 +97,7 @@ TimeComplexity.exe --path
 ```bash
 TimeComplexity.exe --all --datasetsize 5000000
 ```
-![Test results](https://github.com/StianSundby/TimeComplexity/assets/88629622/4d11556e-6c65-4fff-9e76-d4ff7b27251a)
+![Test results](https://github.com/StianSundby/TimeComplexity/assets/88629622/44bf478d-e149-47f0-9b1a-ee6a299e474e)
 
 ## Acknowledgements
  - [Spectre.Console](https://spectreconsole.net/)
