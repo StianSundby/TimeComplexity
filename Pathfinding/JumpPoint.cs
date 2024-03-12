@@ -1,0 +1,7 @@
+﻿namespace TimeComplexity.Pathfinding
+{
+    internal class JumpPoint
+    {
+
+    }
+}
