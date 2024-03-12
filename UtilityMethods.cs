@@ -1,4 +1,5 @@
 using Spectre.Console;
+using System.Text;
 
 namespace uMethodLib
 {
@@ -168,11 +169,44 @@ namespace uMethodLib
             return graph;
         }
 
-    /// <summary>
-    /// Verify that a list of type integer is sorted in ascending order.
-    /// </summary>
-    /// <param name="arr">Collection to verify</param>
-    /// <returns></returns>
+        public static string GenerateRandomStringWithTarget(int n, string target)
+        {
+            StringBuilder stringBuilder = new(n);
+            int targetPosition = random.Next(0, n - target.Length);
+
+            for (int i = 0; i < targetPosition; i++)
+            {
+                char randomChar = (char)random.Next('a', 'z' + 1);
+                stringBuilder.Append(randomChar);
+            }
+
+            stringBuilder.Append(target);
+
+            for (int i = targetPosition + target.Length; i < n; i++)
+            {
+                char randomChar = (char)random.Next('a', 'z' + 1);
+                stringBuilder.Append(randomChar);
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        public static string GenerateRandomSubstring(string text, int substringLength)
+        {
+            int textLength = text.Length;
+
+            if (substringLength > textLength)
+                throw new ArgumentException("Substring length cannot exceed the length of the text.");
+
+            int startIndex = random.Next(0, textLength - substringLength + 1);
+            return text.Substring(startIndex, substringLength);
+        }
+
+        /// <summary>
+        /// Verify that a list of type integer is sorted in ascending order.
+        /// </summary>
+        /// <param name="arr">Collection to verify</param>
+        /// <returns></returns>
         private static bool IsSorted(IList<int> arr)
         {
             for (int i = 1; i < arr.Count; i++)
