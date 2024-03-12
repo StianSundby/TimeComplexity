@@ -1,10 +1,8 @@
 using static uMethodLib.Search.SublistSearch;
 using static uMethodLib.UtilityMethods;
 using static uMethodLib.Sort.Sort;
-using uMethodLib.Pathfinding;
 using uMethodLib.Search;
-using TimeComplexity.MST;
-using TimeComplexity.Pathfinding;
+using static uMethodLib.Search.StringSearch;
 
 namespace uMethodLib
 {
@@ -109,6 +107,30 @@ namespace uMethodLib
             {
                 ["Basic Sublist Search"] = MeasurePerformance(() => BasicSublistSearch(x, y)),
                 ["Adv Sublist Search"] = MeasurePerformance(() => AdvSublistSearch(xNode, yNode))
+            };
+
+            return results;
+        }
+        #endregion
+
+        #region String Search
+        /// <summary>
+        /// Performs performance tests for various string search algorithms.
+        /// </summary>
+        /// <param name="n">The size of the dataset to test.</param>
+        /// <returns>The results of each test - i.e., how long each algorithm took to complete.</returns>
+        public static Dictionary<string, TimeSpan> PerformStringSearchTests(int n)
+        {
+            string text = GenerateRandomStringWithTarget(n, "target");
+            string target = "target";
+
+            var results = new Dictionary<string, TimeSpan>
+            {
+                ["Brute Force"] = MeasurePerformance(() => BruteForceSearch(text, target)),
+                ["KMP"] = MeasurePerformance(() => KMPSearch(text, target)),
+                ["Boyer-Moore"] = MeasurePerformance(() => BoyerMooreSearch(text, target)),
+                ["Rabin-Karp"] = MeasurePerformance(() => RabinKarpSearch(text, target)),
+                ["Aho-Corasick"] = MeasurePerformance(() => AhoCorasickSearch(text, target)),
             };
 
             return results;
