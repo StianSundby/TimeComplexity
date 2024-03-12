@@ -59,22 +59,28 @@ namespace uMethodLib
 
             if (settings.RunSearch)
             {
-                //TODO: Clean this up somehow?
-                results["Sorted Search algorithms"] = PerformSortedSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
-                results["Unsorted Search algorithms"] = PerformUnsortedSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
-                results["First Positive algorithms"] = PerformFirstPositiveTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
-                results["Sublist Search algorithms"] = PerformSublistSearchTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
-
+                results["Sorted Search algorithms"] = Order(PerformSortedSearchTests, n);
+                results["Unsorted Search algorithms"] = Order(PerformUnsortedSearchTests, n);
+                results["First Positive algorithms"] = Order(PerformFirstPositiveTests, n);
+                results["Sublist Search algorithms"] = Order(PerformSublistSearchTests, n);
+                results["String Search algorithms"] = Order(PerformStringSearchTests, n);
             }
 
             if (settings.RunSort)
-                results["Sorting algorithms"] = PerformSortTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+                results["Sorting algorithms"] = Order(PerformSortTests, n);
 
             //if (settings.RunPath)
             //    results["Pathfinding algorithms"] = PerformPathfindingTests(n).OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
 
             RenderResults(results);
             return 0;
+        }
+
+        private static Dictionary<string, TimeSpan> Order(Func<int, Dictionary<string, TimeSpan>> testMethod, int n)
+        {
+            return testMethod(n)
+                .OrderBy(pair => pair.Value)
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
         private static void RenderResults(Dictionary<string, Dictionary<string, TimeSpan>> results)
